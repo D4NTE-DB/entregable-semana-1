@@ -1,0 +1,34 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(30),
+  email VARCHAR(50) UNIQUE NOT NULL,
+  password VARCHAR NOT NULL,
+  age INT NOT NULL
+);
+
+CREATE TABLE courses (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(30),
+  description TEXT,
+  level VARCHAR(50) NOT NULL,
+  teacher VARCHAR(50) NOT NULL,
+  user_id INT REFERENCES users(id)
+);
+
+CREATE TABLE course_video (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(30),
+  url TEXT UNIQUE NOT NULL,
+  course_id INT REFERENCES courses(id)
+);
+
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE roles (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  user_id INT REFERENCES users(id)
+);
